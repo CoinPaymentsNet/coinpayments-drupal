@@ -1,0 +1,9 @@
+commerce_coinpayments.processwebhook:
+  path: '/commerce_coinpayments/webhook'
+  defaults:
+    _controller: '\Drupal\commerce_coinpayments\Controller\CoinPaymentsController::processWebhook'
+    _title: 'Commerce Coinpayments Webhooks'
+  options:
+    no_cache: TRUE
+  requirements:
+    _access: 'TRUE'

@@ -1,0 +1,12 @@
+commerce_coinpayments.commerce_payment_gateway.plugin.coinpayments:
+  type: commerce_payment_gateway_configuration
+  mapping:
+    client_id:
+      type: string
+      label: 'Client ID'
+    webhooks:
+      type: string
+      label: 'Webhooks'
+    client_secret:
+      type: string
+      label: 'Client Secret'
