@@ -315,7 +315,7 @@ class ApiController
     protected function createSignature($method, $api_url, $client_id, $date, $client_secret, $params)
     {
 
-        if (!empty(json_encode($params))) {
+        if (!empty($params)) {
             $params = json_encode($params);
         }
 

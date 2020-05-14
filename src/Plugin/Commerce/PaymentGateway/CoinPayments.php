@@ -201,9 +201,9 @@ class CoinPayments extends OffsitePaymentGatewayBase
     protected function validateWebhook($client_id, $client_secret)
     {
         $api = new ApiController($client_id, true, $client_secret);
-//    if (!$api->checkWebhook()) {
-        $api->createWebhook();
-//    }
+        if (!$api->checkWebhook()) {
+            $api->createWebhook();
+        }
     }
 
     /**
