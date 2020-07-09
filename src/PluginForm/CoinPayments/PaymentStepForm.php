@@ -105,7 +105,9 @@ class PaymentStepForm extends BasePaymentOffsiteForm
         $display_value = $order->getTotalPrice()->getNumber();
         $amount = intval(number_format($display_value, $coin_currency['decimalPlaces'], '', ''));
         $coin_invoice = $api->createInvoice($invoice_id, $coin_currency['id'], $amount, $display_value);
-
+        if($webhooks){
+            $coin_invoice = array_shift($coin_invoice['invoices']);
+        }
         // Create a new payment transaction for the order.
         $payment_storage = \Drupal::entityTypeManager()->getStorage('commerce_payment');
         /** @var \Drupal\commerce_payment\Entity\PaymentInterface $transaction */
