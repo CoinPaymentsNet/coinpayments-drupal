@@ -27,7 +27,7 @@ Installation:
     `drush en commerce_coinpayments`
 
   Manual:
-  - Extract the files in your module directory (web/modules/commerce_coinpayments).
+  - Extract the files in your module directory (web/modules/custom/commerce_coinpayments).
 
   Administrator interface:
   - Go to Administration Extend aria and press "Install new module"
