@@ -239,9 +239,9 @@ class ApiController
 
             if ($client_secret) {
                 $signature = $this->createSignature($method, $api_url, $client_id, $date, $client_secret, $params);
-                $headers[] = 'X-CoinPayments-Client: ' . $client_id;
-                $headers[] = 'X-CoinPayments-Timestamp: ' . $date->format('c');
-                $headers[] = 'X-CoinPayments-Signature: ' . $signature;
+                $headers['X-CoinPayments-Client'] =  $client_id;
+                $headers['X-CoinPayments-Timestamp'] =  $date->format('c');
+                $headers['X-CoinPayments-Signature'] =  $signature;
             }
 
             $options[RequestOptions::HEADERS] = $headers;
