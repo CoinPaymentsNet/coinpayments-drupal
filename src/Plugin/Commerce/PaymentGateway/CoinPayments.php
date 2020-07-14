@@ -198,19 +198,17 @@ class CoinPayments extends OffsitePaymentGatewayBase
      * @param $client_id
      * @param $client_secret
      */
-    protected function validateWebhook($client_id, $client_secret)
+    protected static function validateWebhook($client_id, $client_secret)
     {
         $api = new ApiController($client_id, true, $client_secret);
-        if (!$api->checkWebhook()) {
-            $api->createWebhook();
-        }
+        return $api->checkWebhook();
     }
 
     /**
      * @param $client_id
      * @return bool
      */
-    protected function validateInvoice($client_id)
+    protected static function validateInvoice($client_id)
     {
         $api = new ApiController($client_id);
         $invoice = $api->createInvoice();

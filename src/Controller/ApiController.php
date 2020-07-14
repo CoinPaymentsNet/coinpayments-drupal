@@ -57,6 +57,10 @@ class ApiController
             }
             if (in_array($this->getNotificationUrl(), $webhooks_urls_list)) {
                 $exists = true;
+            }else{
+                if(!empty($this->createWebHook())){
+                    $exists = true;
+                }
             }
         }
 
