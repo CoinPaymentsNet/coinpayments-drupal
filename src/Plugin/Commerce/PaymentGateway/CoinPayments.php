@@ -78,9 +78,9 @@ class CoinPayments extends OffsitePaymentGatewayBase
 
         $form['client_id'] = [
             '#type' => 'textfield',
-            '#title' => t('CoinPayments.net Merchant ID'),
+            '#title' => t('CoinPayments.net Client ID'),
             '#default_value' => $client_id,
-            '#description' => t('The Merchant ID of your CoinPayments.net account.'),
+            '#description' => t('The Client ID of your CoinPayments.net account.'),
             '#required' => TRUE,
         ];
 
