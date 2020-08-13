@@ -30,9 +30,9 @@ Installation:
   - Extract the files in your module directory (web/modules/custom/commerce_coinpayments).
 
   Administrator interface:
-  - Go to Administration Extend aria and press "Install new module"
-  - Install for url https://www.drupal.org/project/commerce_coinpayments
-  - Upload a module archive to install
+  -  Go to Administration Extend aria and press "Install new module"
+  -  Download the desired Drupal version here: https://www.drupal.org/project/commerce_coinpayments
+  -  Upload the plugin archive and install
 
 
   After:
