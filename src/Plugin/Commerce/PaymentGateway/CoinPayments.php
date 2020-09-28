@@ -78,7 +78,7 @@ class CoinPayments extends OffsitePaymentGatewayBase
 
         $form['client_id'] = [
             '#type' => 'textfield',
-            '#title' => t('CoinPayments.net Client ID'),
+            '#title' => t('Client ID'),
             '#default_value' => $client_id,
             '#description' => t('The Client ID of your CoinPayments.net account.'),
             '#required' => TRUE,
@@ -97,7 +97,7 @@ class CoinPayments extends OffsitePaymentGatewayBase
 
         $form['client_secret'] = [
             '#type' => 'textfield',
-            '#title' => t('CoinPayments.net Client Secret'),
+            '#title' => t('Client Secret'),
             '#default_value' => $client_secret,
             '#description' => t('Client Secret of your CoinPayments.net account.'),
             '#states' => array(
