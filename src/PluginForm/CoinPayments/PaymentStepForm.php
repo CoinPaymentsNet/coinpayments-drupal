@@ -63,7 +63,7 @@ class PaymentStepForm extends BasePaymentOffsiteForm
       'success-url' => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
     ];
 
-    $redirect_url = sprintf('%s/%s/', ApiController::API_URL, ApiController::API_CHECKOUT_ACTION);
+    $redirect_url = sprintf('%s/%s/', ApiController::CHECKOUT_URL, ApiController::API_CHECKOUT_ACTION);
 
     foreach ($data as $name => $value) {
       if (isset($value)) {
