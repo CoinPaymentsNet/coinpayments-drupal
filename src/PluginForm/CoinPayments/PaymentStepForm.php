@@ -104,9 +104,11 @@ class PaymentStepForm extends BasePaymentOffsiteForm
 
     $notes_link = sprintf(
       "%s|Store name: %s|Order #%s",
-      \Drupal::request()->getSchemeAndHttpHost(). $order->toUrl()->toString(),
+      \Drupal::request()->getSchemeAndHttpHost() . $order->toUrl()->toString(),
       \Drupal::config('system.site')->get('name'),
       $order->id());
+
+    $billing_profile = $order->getBillingProfile()->get('address')->getValue();
 
     $invoice_params = array(
       'invoice_id' => sprintf('%s|%s', md5(\Drupal::request()->getSchemeAndHttpHost()), $order->id()),
@@ -114,6 +116,10 @@ class PaymentStepForm extends BasePaymentOffsiteForm
       'amount' => $amount,
       'display_value' => $display_value,
       'notes_link' => $notes_link,
+      'billing_data' => array_merge(
+        array('email' => $order->getEmail()),
+        array_shift($billing_profile)
+      ),
     );
 
     $coin_invoice = $api->createInvoice($invoice_params);

@@ -138,6 +138,9 @@ class ApiController
       $params['notesToRecipient'] = $invoice_params['notes_link'];
     }
 
+    if(isset($invoice_params['billing_data'])){
+      $params = $this->appendBillingData($params, $invoice_params['billing_data']);
+    }
     $params = $this->appendInvoiceMetadata($params);
     return $this->sendRequest('POST', $action, $this->client_id, $params, $secret);
   }
@@ -303,6 +306,41 @@ class ApiController
     }
 
     return $result;
+  }
+
+  /**
+   * @param $request_params
+   * @param $billing_data
+   * @return array
+   */
+  function appendBillingData($request_params, $billing_data)
+  {
+
+    $request_params['buyer'] = array(
+      'companyName' => $billing_data['organization'],
+      'name' => array(
+        'firstName' => $billing_data['given_name'],
+        'lastName' => $billing_data['family_name'],
+      ),
+      'emailAddress' => $billing_data['email'],
+    );
+
+    if (!empty($billing_data['address_line1']) &&
+      !empty($billing_data['locality']) &&
+      preg_match('/^([A-Z]{2})$/', $billing_data['country_code'])
+    ) {
+      $request_params['buyer']['address'] = array(
+        'address1' => $billing_data['address_line1'],
+        'address2' => $billing_data['address_line2'],
+        'provinceOrState' => $billing_data['administrative_area'],
+        'city' => $billing_data['locality'],
+        'countryCode' => $billing_data['country_code'],
+        'postalCode' => $billing_data['postal_code'],
+      );
+
+    }
+
+    return $request_params;
   }
 
   /**
