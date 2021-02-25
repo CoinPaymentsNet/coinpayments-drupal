@@ -100,7 +100,7 @@ class WebhookHandler implements WebhookHandlerInterface
     }
 
     $api = new ApiController($config['client_id'], $config['webhooks'], $config['client_secret']);
-    if (!$api->checkDataSignature($signature, $content)) {
+    if (!$api->checkDataSignature($signature, $content, $webhook_data['invoice']['status'])) {
       return false;
     }
 
@@ -125,15 +125,14 @@ class WebhookHandler implements WebhookHandlerInterface
       $transaction->setState('new');
     }
 
-    if ($webhook_data['invoice']['status'] == 'Completed') {
-
+    if ($webhook_data['invoice']['status'] == ApiController::PAID_EVENT) {
       $transaction->setRemoteState($webhook_data['invoice']['status']);
       $transaction->setState('completed');
       $transition = $order->getState()->getWorkflow()->getTransition('place');
       $order->getState()->applyTransition($transition);
       $order->save();
 
-    } else if ($webhook_data['invoice']['status'] == 'Cancelled') {
+    } elseif ($webhook_data['invoice']['status'] == ApiController::CANCELLED_EVENT) {
 
       $transaction->setRemoteState($webhook_data['invoice']['status']);
       $transaction->setState('failed');

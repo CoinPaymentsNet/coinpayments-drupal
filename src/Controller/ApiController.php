@@ -24,6 +24,9 @@ class ApiController
   const API_CHECKOUT_ACTION = 'checkout';
   const FIAT_TYPE = 'fiat';
 
+  const PAID_EVENT = 'Paid';
+  const CANCELLED_EVENT = 'Cancelled';
+
   protected $client_id;
   protected $client_secret;
   protected $webhooks;
@@ -56,10 +59,16 @@ class ApiController
           return $webHook['notificationsUrl'];
         }, $webhooks_list['items']);
       }
-      if (in_array($this->getNotificationUrl(), $webhooks_urls_list)) {
+      if (
+        in_array($this->getNotificationUrl(self::PAID_EVENT), $webhooks_urls_list) &&
+        in_array($this->getNotificationUrl(self::CANCELLED_EVENT), $webhooks_urls_list)
+      ) {
         $exists = true;
       } else {
-        if (!empty($this->createWebHook())) {
+        if (
+          !empty($this->createWebHook(self::PAID_EVENT)) &&
+          !empty($this->createWebHook(self::CANCELLED_EVENT))
+        ) {
           $exists = true;
         }
       }
@@ -81,22 +90,18 @@ class ApiController
   }
 
   /**
+   * @param $event
    * @return bool|mixed
-   * @throws Exception
    */
-  public function createWebHook()
+  public function createWebHook($event)
   {
 
     $action = sprintf(self::API_WEBHOOK_ACTION, $this->client_id);
 
     $params = array(
-      "notificationsUrl" => $this->getNotificationUrl(),
+      "notificationsUrl" => $this->getNotificationUrl($event),
       "notifications" => [
-        "invoiceCreated",
-        "invoicePending",
-        "invoicePaid",
-        "invoiceCompleted",
-        "invoiceCancelled",
+        sprintf("invoice%s", $event),
       ],
     );
 
@@ -171,12 +176,13 @@ class ApiController
   /**
    * @param $signature
    * @param $content
+   * @param $event
    * @return bool
    */
-  public function checkDataSignature($signature, $content)
+  public function checkDataSignature($signature, $content, $event)
   {
 
-    $request_url = $this->getNotificationUrl();
+    $request_url = $this->getNotificationUrl($event);
     $signature_string = sprintf('%s%s', $request_url, $content);
     $encoded_pure = $this->encodeSignatureString($signature_string, $this->client_secret);
     return $signature == $encoded_pure;
@@ -202,11 +208,15 @@ class ApiController
   }
 
   /**
+   * @param $event
    * @return string
    */
-  protected function getNotificationUrl()
+  protected function getNotificationUrl($event)
   {
-    return Url::fromRoute('commerce_coinpayments.processwebhook', [], ['absolute' => TRUE])->toString();
+    return Url::fromRoute('commerce_coinpayments.processwebhook', [
+      'clientId' => $this->client_id,
+      'event' => $event
+    ], ['absolute' => TRUE])->toString();
   }
 
   /**
