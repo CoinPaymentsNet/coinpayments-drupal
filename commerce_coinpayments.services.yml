@@ -1,4 +1,4 @@
 services:
   commerce_coinpayments.webhook_handler:
     class: Drupal\commerce_coinpayments\WebhookHandler
-    arguments: ['@database', '@entity_type.manager', '@config.factory']
+    arguments: [ '@database', '@entity_type.manager', '@config.factory' ]

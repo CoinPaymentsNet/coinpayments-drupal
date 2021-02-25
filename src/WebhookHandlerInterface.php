@@ -10,17 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
 interface WebhookHandlerInterface
 {
 
-    /**
-     * Processes an incoming Webhook request.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *   The request.
-     *
-     * @return mixed
-     *   The request data array.
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     */
-    public function process(Request $request);
+  /**
+   * Processes an incoming Webhook request.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The request.
+   *
+   * @return mixed
+   *   The request data array.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+   */
+  public function process(Request $request);
 
 }

@@ -16,16 +16,16 @@ use Drupal\commerce_payment\Entity\PaymentMethodInterface;
 class Coinpayments extends PaymentMethodTypeBase
 {
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildLabel(PaymentMethodInterface $payment_method)
-    {
+  /**
+   * {@inheritdoc}
+   */
+  public function buildLabel(PaymentMethodInterface $payment_method)
+  {
 
-        $args = [
-            '@name' => t('Redirect'),
-        ];
-        return $this->t('CoinPayments.Net @name', $args);
-    }
+    $args = [
+      '@name' => t('Redirect'),
+    ];
+    return $this->t('CoinPayments.Net @name', $args);
+  }
 
 }

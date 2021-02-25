@@ -1,22 +1,22 @@
 {
-  "name": "grumpy-dog/coin-drupal",
-  "type": "drupal-module",
-  "description": "Provides Commerce integration for CoinPayments.net.",
-  "homepage": "https://www.coinpayments.net/",
-  "license": "GPL-2.0-or-later",
-  "version": "2.0.0",
-  "repositories": {
-    "drupal": {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
+    "name": "grumpy-dog/coin-drupal",
+    "type": "drupal-module",
+    "description": "Provides Commerce integration for CoinPayments.net.",
+    "homepage": "https://www.coinpayments.net/",
+    "license": "GPL-2.0-or-later",
+    "version": "2.0.0",
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "commerce_base": {
+            "type": "vcs",
+            "url": "https://github.com/drupalcommerce/commerce_base"
+        }
     },
-    "commerce_base": {
-      "type": "vcs",
-      "url": "https://github.com/drupalcommerce/commerce_base"
-    }
-  },
-  "require": {
-    "drupal/commerce": "^2"
-  },
-  "minimum-stability": "dev"
+    "require": {
+        "drupal/commerce": "^2"
+    },
+    "minimum-stability": "dev"
 }

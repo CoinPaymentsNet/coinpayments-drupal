@@ -2,9 +2,9 @@ admin-gateway:
   version: 1.x
   css:
     component:
-      css/admin-gateway.css: {}
+      css/admin-gateway.css: { }
   js:
-    js/admin-gateway.js: {}
+    js/admin-gateway.js: { }
   dependencies:
     - core/jquery
     - core/drupalSettings
@@ -12,17 +12,17 @@ currency-form:
   version: 1.x
   css:
     component:
-      css/currency-form.css: {}
+      css/currency-form.css: { }
   js:
-    js/currency-form.js: {}
+    js/currency-form.js: { }
   dependencies:
     - core/jquery
 status-form:
   version: 1.x
   css:
     component:
-      css/status-form.css: {}
+      css/status-form.css: { }
   js:
-    js/status-form.js: {}
+    js/status-form.js: { }
   dependencies:
     - core/jquery
