@@ -109,14 +109,11 @@ class ApiController
   }
 
   /**
-   * @param $invoice_id
-   * @param $currency_id
-   * @param $amount
-   * @param $display_value
+   * @param $invoice_params
    * @return bool|mixed
    * @throws Exception
    */
-  public function createInvoice($invoice_id = 'Validate invoice', $currency_id = 5057, $amount = 1, $display_value = '0.01')
+  public function createInvoice($invoice_params)
   {
 
     if ($this->webhooks) {
@@ -129,13 +126,17 @@ class ApiController
 
     $params = array(
       'clientId' => $this->client_id,
-      'invoiceId' => $invoice_id,
+      'invoiceId' => $invoice_params['invoice_id'],
       'amount' => [
-        'currencyId' => $currency_id,
-        "displayValue" => $display_value,
-        'value' => $amount
+        'currencyId' => $invoice_params['currency_id'],
+        "displayValue" => $invoice_params['display_value'],
+        'value' => $invoice_params['amount'],
       ],
     );
+
+    if (isset($invoice_params['notes_link'])) {
+      $params['notesToRecipient'] = $invoice_params['notes_link'];
+    }
 
     $params = $this->appendInvoiceMetadata($params);
     return $this->sendRequest('POST', $action, $this->client_id, $params, $secret);

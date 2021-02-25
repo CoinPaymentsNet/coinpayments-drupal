@@ -211,7 +211,13 @@ class CoinPayments extends OffsitePaymentGatewayBase
   protected static function validateInvoice($client_id)
   {
     $api = new ApiController($client_id);
-    $invoice = $api->createInvoice();
+    $invoice_params = array(
+      'invoice_id' => 'Validate invoice',
+      'currency_id' => 5057,
+      'amount' => 1,
+      'display_value' => '0.01',
+    );
+    $invoice = $api->createInvoice($invoice_params);
     return !empty($invoice['id']);
   }
 }

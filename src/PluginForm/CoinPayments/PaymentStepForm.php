@@ -98,13 +98,25 @@ class PaymentStepForm extends BasePaymentOffsiteForm
 
     $api = new ApiController($client_id, $webhooks, $client_secret);
 
-    $invoice_id = sprintf('%s|%s', md5(\Drupal::request()->getSchemeAndHttpHost()), $order->id());
-
     $coin_currency = $api->getCoinCurrency($order->getTotalPrice()->getCurrencyCode());
-
     $display_value = $order->getTotalPrice()->getNumber();
     $amount = intval(number_format($display_value, $coin_currency['decimalPlaces'], '', ''));
-    $coin_invoice = $api->createInvoice($invoice_id, $coin_currency['id'], $amount, $display_value);
+
+    $notes_link = sprintf(
+      "%s|Store name: %s|Order #%s",
+      \Drupal::request()->getSchemeAndHttpHost(). $order->toUrl()->toString(),
+      \Drupal::config('system.site')->get('name'),
+      $order->id());
+
+    $invoice_params = array(
+      'invoice_id' => sprintf('%s|%s', md5(\Drupal::request()->getSchemeAndHttpHost()), $order->id()),
+      'currency_id' => $coin_currency['id'],
+      'amount' => $amount,
+      'display_value' => $display_value,
+      'notes_link' => $notes_link,
+    );
+
+    $coin_invoice = $api->createInvoice($invoice_params);
     if ($webhooks) {
       $coin_invoice = array_shift($coin_invoice['invoices']);
     }
