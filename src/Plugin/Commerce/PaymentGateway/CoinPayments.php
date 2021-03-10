@@ -195,6 +195,21 @@ class CoinPayments extends OffsitePaymentGatewayBase
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function getDisplayLabel()
+  {
+    $label = parent::getDisplayLabel();
+
+    $coinpayments_link = sprintf(
+        '<a href="%s" target="_blank" title="CoinPayments.net">CoinPayments.net</a>',
+        'https://alpha.coinpayments.net/'
+    );
+    $coin_description = 'Pay with Bitcoin, Litecoin, or other altcoins via ';
+    return sprintf('%s<br/>%s<br/>%s', $label, $coin_description, $coinpayments_link);
+ }
+
+ /**
    * @param $client_id
    * @param $client_secret
    */
