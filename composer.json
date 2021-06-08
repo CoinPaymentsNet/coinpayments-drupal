@@ -1,5 +1,5 @@
 {
-    "name": "grumpy-dog/coin-drupal",
+    "name": "coinpayments/coinpayments-drupal-commerce",
     "type": "drupal-module",
     "description": "Provides Commerce integration for CoinPayments.net.",
     "homepage": "https://www.coinpayments.net/",
@@ -8,7 +8,7 @@
     "repositories": {
         "drupal": {
             "type": "composer",
-            "url": "https://packages.drupal.org/8"
+            "url": "https://packages.drupal.org/9"
         },
         "commerce_base": {
             "type": "vcs",

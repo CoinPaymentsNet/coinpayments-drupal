@@ -8,11 +8,8 @@ libraries:
 dependencies:
   - commerce
   - commerce:commerce_payment
-# core: '8.x'
-# project: 'commerce_coinpayments'
-
-# Information added by Drupal.org packaging script on 2018-03-14
-version: '8.x-2.0'
-core: '8.x'
+version: '9.x-2.0'
+core: 8.x
+core_version_requirement: ^8 || ^9
 project: 'commerce_coinpayments'
-datestamp: 1521012786
+datestamp: 1623157349
