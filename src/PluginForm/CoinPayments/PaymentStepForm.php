@@ -110,7 +110,7 @@ class PaymentStepForm extends BasePaymentOffsiteForm
     $billing_profile = $order->getBillingProfile()->get('address')->getValue();
 
     $invoice_params = array(
-      'invoice_id' => sprintf('%s|%s', md5(\Drupal::request()->getSchemeAndHttpHost()), $order->id()),
+      'invoice_id' => sprintf('%s|%s|', md5(\Drupal::request()->getSchemeAndHttpHost()), $order->id()),
       'currency_id' => $coin_currency['id'],
       'amount' => $amount,
       'display_value' => $display_value,
