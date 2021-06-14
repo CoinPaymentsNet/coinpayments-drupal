@@ -103,10 +103,9 @@ class PaymentStepForm extends BasePaymentOffsiteForm
     $amount = intval(number_format($display_value, $coin_currency['decimalPlaces'], '', ''));
 
     $notes_link = sprintf(
-      "%s|Store name: %s|Order #%s",
+      "%s|Store name: %s|Order",
       \Drupal::request()->getSchemeAndHttpHost() . $order->toUrl()->toString(),
-      \Drupal::config('system.site')->get('name'),
-      $order->id());
+      \Drupal::config('system.site')->get('name'));
 
     $billing_profile = $order->getBillingProfile()->get('address')->getValue();
 
