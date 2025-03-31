@@ -1,5 +1,7 @@
 # Drupal Commerce
 
+> NOTICE: Migrated to [CoinPaymentsNet/plugin-drupal](https://github.com/CoinPaymentsNet/plugin-drupal).
+
 IMPORTANT NOTE:
 
 This is only for use with: https://alpha.coinpayments.net/
